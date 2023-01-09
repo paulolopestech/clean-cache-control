@@ -11,12 +11,12 @@ export class CacheStoreSpy implements CacheStore {
     fetch(key: string): void {
         this.actions.push(CacheStoreSpy.Action.fetch);
         this.fetchKey = key;
-    }
+    };
 
     delete(key: string): void {
         this.actions.push(CacheStoreSpy.Action.delete);
         this.deleteKey = key;
-    }
+    };
 
     insert(key: string, value: any): void {
         this.actions.push(CacheStoreSpy.Action.insert);
@@ -34,14 +34,21 @@ export class CacheStoreSpy implements CacheStore {
             this.actions.push(CacheStoreSpy.Action.delete);
             throw new Error();
         });
-    }
+    };
 
     simulateInsertError(): void {
         jest.spyOn(CacheStoreSpy.prototype, 'insert').mockImplementationOnce(() => {
             this.actions.push(CacheStoreSpy.Action.insert);
             throw new Error();
         });
-    }
+    };
+
+    simulateFetchError(): void {
+        jest.spyOn(CacheStoreSpy.prototype, 'fetch').mockImplementationOnce(() => {
+            this.actions.push(CacheStoreSpy.Action.fetch);
+            throw new Error();
+        });
+    };
 }
 
 export namespace CacheStoreSpy {
