@@ -55,7 +55,6 @@ describe('LocalLoadPurchases', () => {
     test('Should delete cache if its on expiration date', () => {
         const currentDate = new Date();
         const timestamp = getCacheExpirationDate(currentDate);
-        timestamp.setSeconds(timestamp.getSeconds());
         const { cacheStore, sut } = makeSut(currentDate);
         cacheStore.fetchResult = { timestamp };
         sut.validate();
